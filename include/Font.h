@@ -94,7 +94,7 @@ public:
          * Hidden copy assignment operator.
          */
         Text& operator=(const Text&);
-        
+
         std::string _text;
         unsigned int _vertexCount;
         SpriteBatch::SpriteVertex* _vertices;
@@ -116,7 +116,7 @@ public:
      *
      * @param path The path to a bundle file containing a font resource.
      * @param id An optional ID of the font resource within the bundle (NULL for the first/only resource).
-     * 
+     *
      * @return The specified Font or NULL if there was an error.
      * @script{create}
      */
@@ -170,7 +170,7 @@ public:
 
     /**
      * Draws the specified text in a solid color, with a scaling factor.
-     * 
+     *
      * @param text The text to draw.
      * @param x The viewport x position to draw text at.
      * @param y The viewport y position to draw text at.
@@ -196,7 +196,7 @@ public:
      * @param rightToLeft Whether to draw text from right to left.
      * @param clip A region to clip text within after applying justification to the viewport area.
      */
-    void drawText(const char* text, const Rectangle& area, const Vector4& color, unsigned int size = 0, 
+    void drawText(const char* text, const Rectangle& area, const Vector4& color, unsigned int size = 0,
                   Justify justify = ALIGN_TOP_LEFT, bool wrap = true, bool rightToLeft = false, const Rectangle* clip = NULL);
 
     /**
@@ -264,15 +264,14 @@ public:
     float getCharacterSpacing() const;
 
     /**
-     * Sets the fixed character spacing for this font.
+     * Sets the additional character spacing for this font.
      *
-     * Character spacing is the fixed amount of space that is inserted between characters. This is a simplified
-     * type of kerning and does not take adjacent characters into consideration. Character spacing is defined
+     * Character spacing is the additional amount of space that is inserted between characters. Character spacing is defined
      * as a floating point value that is interpreted as a percentage of size used to draw the font. For example,
      * a value of 0.1 would cause a spacing of 10% of the font size to be inserted between adjacent characters.
      * For a font size of 20, this would equate to 2 pixels of extra space between characters.
      *
-     * The default character spacing for fonts is 0.125.
+     * The default additional character spacing for fonts is 0.0.
      *
      * @param spacing New fixed character spacing, expressed as a percentage of font size.
      */
@@ -292,7 +291,7 @@ public:
 
     /**
      * Gets the sprite batch used to draw this Font.
-     * 
+     *
      * @param size The font size to be drawn.
      *
      * @return The SpriteBatch that most closely matches the requested font size.
@@ -302,9 +301,9 @@ public:
     /**
      * Gets the Justify value from the given string.
      * Returns ALIGN_TOP_LEFT if the string is unrecognized.
-     * 
+     *
      * @param justify The string such as "ALIGN_HCENTER" or "ALIGN_VCENTER_RIGHT".
-     * 
+     *
      * @return The Justify value.
      */
     static Justify getJustify(const char* justify);
@@ -326,6 +325,16 @@ private:
          * Glyph width (in pixels).
          */
         unsigned int width;
+
+        /**
+         * Glyph left side bearing (in pixels).
+         */
+        int bearingX;
+
+        /**
+         * Glyph horizontal advance (in pixels).
+         */
+        unsigned int advance;
 
         /**
          * Glyph texture coordinates.
@@ -366,7 +375,7 @@ private:
      * @param glyphCount The number of items in the glyph array.
      * @param texture A texture map containing rendered glyphs.
      * @param format The format of the font (bitmap or distance fields)
-     * 
+     *
      * @return The new Font or NULL if there was an error.
      */
     static Font* create(const char* family, Style style, unsigned int size, Glyph* glyphs, int glyphCount, Texture* texture, Font::Format format);

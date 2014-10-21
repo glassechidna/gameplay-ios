@@ -1,10 +1,9 @@
 #ifndef TEXTBOX_H_
 #define TEXTBOX_H_
 
-#include "Base.h"
+#include <string>
+
 #include "Label.h"
-#include "Theme.h"
-#include "Keyboard.h"
 
 namespace gameplay
 {
@@ -106,6 +105,8 @@ public:
      * @return The input mode.
      */
     InputMode getInputMode() const;
+
+    virtual void addListener(Control::Listener* listener, int eventFlags);
 
 protected:
 
@@ -235,6 +236,11 @@ protected:
      * Indicate if the CTRL key is currently pressed.
      */
     bool _ctrlPressed;
+
+    /**
+     * Indicate if the SHIFT key is currently pressed.
+     */
+    bool _shiftPressed = false;
 
 private:
 
